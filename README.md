@@ -28,3 +28,19 @@ figure=plt.plot(data.Date,data.Close)
 plt.show()
 plt.figsave
 ```
+![全年收盘价波动](https://github.com/TGF-B/Stock-Price-Prediction/blob/main/Figure_1.png)
+
+但股市更常用**烛台图**（Candlestick），就是将开盘价，高点，低点，和收盘价全部展现在一张图中。
+因此我们再会绘制一下烛台图。
+```python
+import plotly.graph_objects as go
+figure=go.Figure(data=[go.Candlestick(x=go.Candlestick(x=data.index,
+                                                        open=data["Open"],
+                                                        high=data["High|],
+                                                        low=data["low"],
+                                                        close=data["Close"])
+figure.update_layout(title="Time Series Analysis(Candlestick Chart)",
+                      xaixs_rangeslider_visible=False)
+figure.show()
+```
+                                                       
