@@ -1,7 +1,7 @@
 # Stock-Price-Prediction
 若要分析的数据集是实时更新的，我们把它称作TSA时间序列分析（Time Series Analysis）,经常需要用到TSA的场景之一就是股市。这次我们来分析一下苹果的股价，并用LSTM长短期记忆神经网络算法([Long Short Term Memory](https://www.geeksforgeeks.org/long-short-term-memory-networks-explanation/))来预测它的走向。
 
-##导入数据并预处理
+## 导入数据并预处理
 股市数据可以从[纳斯达克官网](https://www.nasdaq.com/market-activity/stocks/aapl/historical)下载。
 我取了近一年的数据。
 ```python
@@ -21,7 +21,7 @@ data.head()
 >     3  05/13/2021  124.97  105861300  124.58  126.15  124.26
 >     4  05/14/2021  127.45   81917950  126.25  127.89  125.85
 
-##绘制近一年收盘价波动图
+## 绘制近一年收盘价波动图
 ```python
 import matplotlib.pyplot as plt
 figure=plt.plot(data.Date,data.Close)
@@ -58,7 +58,7 @@ print(correlation["Close"],sort_values(ascending=True))
 >     Volume    0.276286
 >     Name: Close, dtype: float64
 
-##训练LSTM模型
+## 训练LSTM模型
 - 数据集分割
 ```python
 x=data[["Open","High","Low","Volume"]]
@@ -93,6 +93,30 @@ model.summary()
 >     Trainable params: 117,619
 >     Non-trainable params: 0
 >     _________________________________________________________________
+
+- 开始训练模型
+```python
+model.compile(optimizer='adam', loss='mean_squared_error')
+model.fit(xtrain, ytrain, batch_size=1, epochs=60)
+```
+>     Epoch 1/60
+>     201/201 [==============================] - 1s 5ms/step - loss: 3.5582
+>     Epoch 2/60
+>     201/201 [==============================] - 1s 5ms/step - loss: 5.6847
+>     Epoch 3/60
+>     201/201 [==============================] - 1s 5ms/step - loss: 3.3240
+>     ...
+>     201/201 [==============================] - 1s 5ms/step - loss: 3.8948
+>     Epoch 60/60
+>     201/201 [==============================] - 1s 5ms/step - loss: 3.3578
+>     <keras.callbacks.History object at 0x0000024CEFCFCE50>
+
+我这里经过30,40,50,60,70,80次epoch的测试，只有60的损失是最低的，因此epoch times选了60。    
+- 测试模型
+feature
+
+
+
 
 
 
