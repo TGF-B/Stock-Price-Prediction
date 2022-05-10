@@ -113,7 +113,23 @@ model.fit(xtrain, ytrain, batch_size=1, epochs=60)
 
 我这里经过30,40,50,60,70,80次epoch的测试，只有60的损失是最低的，因此epoch times选了60。    
 - 测试模型
-feature
+训练模型所用的数据集是5月6日往前一年的，因此验证数据我们就用5月9日纳斯达克刚公布的。
+```python
+import numpy as np
+#features=["Open”,"High","low","volume"]
+features=np.array([[154.925,155.925,151.49,131577900]])
+model.predict(features)
+```
+预测所得的收盘价为：
+
+>    array([[153.51788]], dtype=float32)
+
+而5月9日真实的收盘价为**152.06**美元！差了1.4美元。
+ 
+ ## 结论
+ 从目前唯一的验证结果来看，我们的模型还是差强人意，本模型拿来做炒股的参考就还不错！
+ 明天我们将继续验证！
+
 
 
 
