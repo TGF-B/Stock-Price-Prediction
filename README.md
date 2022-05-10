@@ -43,6 +43,8 @@ figure.update_layout(title="Time Series Analysis(Candlestick Chart)",
                       xaixs_rangeslider_visible=False)
 figure.show()
 ```
+![烛台图](https://github.com/TGF-B/Stock-Price-Prediction/blob/main/CandleStick.PNG)
+
 查看一下相关性
 ```python
 data=data.drop(“Date”，axis=1,inplace=True)
