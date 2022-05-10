@@ -44,3 +44,15 @@ figure.update_layout(title="Time Series Analysis(Candlestick Chart)",
 figure.show()
 ```
                                                        
+图片
+再看一下股价指标的相关性
+```python
+data=data.drop("Date",axis=1,inplace=True) #删除数据集中日期这个无关项
+correlation=data.corr()
+print(correlation["Close"].sort_values(ascending=False))
+```
+>        Close     Volume    Open    High     Low
+>     0  126.85   88071230  129.41  129.54  126.81
+>     1  125.91  126142800  123.50  126.27  122.77
+>     2  122.77  112172300  123.40  124.64  122.25
+>     3  124.97  105861300  124.58  126.15  124.26
