@@ -58,4 +58,41 @@ print(correlation["Close"],sort_values(ascending=True))
 >     Volume    0.276286
 >     Name: Close, dtype: float64
 
+##训练LSTM模型
+- 数据集分割
+```python
+x=data[["Open","High","Low","Volume"]]
+y=data["Close"]
+x=x.to_numpy() #以4维向量名成立n X 4的自变量矩阵
+y=y.to_numpy() #以1维向量名成立n X 1的因变量矩阵
+y=y.reshape(-1,1)#-1代表固定行数
+from sklearn.model_selection import train_test_slpit
+xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.2,random_state=42)
+```
+- 建立神经网络架构模型
+```python
+from keras.models import Sequential
+from keras.layers import Dense, LSTM
+model = Sequential()
+model.add(LSTM(128, return_sequences=True, input_shape= (xtrain.shape[1], 1)))
+model.add(LSTM(64, return_sequences=False))
+model.add(Dense(25))
+model.add(Dense(1))
+model.summary()
+```
+>     Model: "sequential"
+>     _________________________________________________________________
+>      Layer (type)                Output Shape              Param #
+>     =================================================================
+>      lstm (LSTM)                 (None, 4, 128)            66560
+>      lstm_1 (LSTM)               (None, 64)                49408
+>      dense (Dense)               (None, 25)                1625
+>      dense_1 (Dense)             (None, 1)                 26
+>     =================================================================
+>     Total params: 117,619
+>     Trainable params: 117,619
+>     Non-trainable params: 0
+>     _________________________________________________________________
+
+
 
